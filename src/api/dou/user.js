@@ -17,14 +17,6 @@ export function getUser(id) {
   })
 }
 
-// 新增应用用户
-export function addUser(data) {
-  return request({
-    url: '/dou/user',
-    method: 'post',
-    data: data
-  })
-}
 
 // 修改应用用户
 export function updateUser(data) {

@@ -77,8 +77,8 @@ const router = useRouter();
 const { proxy } = getCurrentInstance();
 
 const loginForm = ref({
-  username: "admin",
-  password: "admin123",
+  username: import.meta.env.DEV ? 'admin':'',
+  password: import.meta.env.DEV ? 'admin123':'',
   rememberMe: false,
   code: "",
   uuid: ""

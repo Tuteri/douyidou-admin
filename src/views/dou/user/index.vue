@@ -95,7 +95,7 @@
 
     <el-table v-loading="loading" :data="dou_userList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="ID" align="center" prop="id" />
+      <el-table-column label="ID" align="center" prop="id" width="55"/>
       <el-table-column label="微信昵称" align="center" prop="wxName" />
       <el-table-column label="微信openid" align="center" prop="wxOpenid" />
       <el-table-column label="用户名" align="center" prop="username" />
@@ -173,7 +173,7 @@
 </template>
 
 <script setup name="Dou_user">
-import { listUser, getUser, delUser, addUser, updateUser } from "@/api/dou/user";
+import { listUser, getUser, delUser, updateUser } from "@/api/dou/user";
 
 const { proxy } = getCurrentInstance();
 
@@ -199,20 +199,6 @@ const data = reactive({
     username: null,
     updateTime: null,
     createTime: null,
-  },
-  rules: {
-    username: [
-      { required: true, message: "用户名不能为空", trigger: "blur" }
-    ],
-    password: [
-      { required: true, message: "密码不能为空", trigger: "blur" }
-    ],
-    updateTime: [
-      { required: true, message: "更新时间不能为空", trigger: "blur" }
-    ],
-    createTime: [
-      { required: true, message: "创建时间不能为空", trigger: "blur" }
-    ],
   }
 });
 
@@ -279,12 +265,6 @@ function handleSelectionChange(selection) {
   multiple.value = !selection.length;
 }
 
-/** 新增按钮操作 */
-function handleAdd() {
-  reset();
-  open.value = true;
-  title.value = "添加应用用户";
-}
 
 /** 修改按钮操作 */
 function handleUpdate(row) {
@@ -304,12 +284,6 @@ function submitForm() {
       if (form.value.id != null) {
         updateUser(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
-          open.value = false;
-          getList();
-        });
-      } else {
-        addUser(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
           open.value = false;
           getList();
         });

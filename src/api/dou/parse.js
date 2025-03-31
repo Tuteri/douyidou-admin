@@ -17,23 +17,6 @@ export function getParse(id) {
   })
 }
 
-// 新增视频解析记录
-export function addParse(data) {
-  return request({
-    url: '/dou/parse',
-    method: 'post',
-    data: data
-  })
-}
-
-// 修改视频解析记录
-export function updateParse(data) {
-  return request({
-    url: '/dou/parse',
-    method: 'put',
-    data: data
-  })
-}
 
 // 删除视频解析记录
 export function delParse(id) {

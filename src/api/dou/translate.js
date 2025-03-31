@@ -17,23 +17,7 @@ export function getTranslate(id) {
   })
 }
 
-// 新增视频转码
-export function addTranslate(data) {
-  return request({
-    url: '/dou/translate',
-    method: 'post',
-    data: data
-  })
-}
 
-// 修改视频转码
-export function updateTranslate(data) {
-  return request({
-    url: '/dou/translate',
-    method: 'put',
-    data: data
-  })
-}
 
 // 删除视频转码
 export function delTranslate(id) {

@@ -26,25 +26,6 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['dou:parse:add']"
-        >新增</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['dou:parse:edit']"
-        >修改</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
           type="danger"
           plain
           icon="Delete"
@@ -67,19 +48,20 @@
 
     <el-table v-loading="loading" :data="parseList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="id" align="center" prop="id" />
+      <el-table-column label="id" align="center" prop="id"  width="55"/>
+      <el-table-column label="用户id" align="center" prop="uid"  width="80"/>
       <el-table-column label="视频地址" align="center" prop="url" show-overflow-tooltip />
-      <el-table-column label="Hash" align="center" prop="urlHash" />
-      <el-table-column label="视频类型" align="center" prop="type" />
-      <el-table-column label="视频地址" align="center" prop="video" />
-      <el-table-column label="音频地址" align="center" prop="audio" />
-      <el-table-column label="图片地址" align="center" prop="images" />
-      <el-table-column label="封面地址" align="center" prop="cover" />
-      <el-table-column label="文案" align="center" prop="text" />
+      <el-table-column label="Hash" align="center" prop="urlHash"  show-overflow-tooltip />
+      <el-table-column label="视频类型" align="center" prop="type" show-overflow-tooltip />
+      <el-table-column label="视频地址" align="center" prop="video" show-overflow-tooltip />
+      <el-table-column label="音频地址" align="center" prop="audio" show-overflow-tooltip />
+      <el-table-column label="图片地址" align="center" prop="images" show-overflow-tooltip />
+      <el-table-column label="封面地址" align="center" prop="cover"  show-overflow-tooltip />
+      <el-table-column label="文案" align="center" prop="text" show-overflow-tooltip />
       <el-table-column label="平台" align="center" prop="platform" />
+      <el-table-column label="解析时间" align="center" prop="createTime" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['dou:parse:edit']">修改</el-button>
           <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['dou:parse:remove']">删除</el-button>
         </template>
       </el-table-column>
@@ -92,35 +74,11 @@
       v-model:limit="queryParams.pageSize"
       @pagination="getList"
     />
-
-    <!-- 添加或修改视频解析记录对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="parseRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="视频url" prop="url">
-          <el-input v-model="form.url" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="视频地址" prop="video">
-          <el-input v-model="form.video" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="文案" prop="text">
-          <el-input v-model="form.text" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="平台 0未知" prop="platform">
-          <el-input v-model="form.platform" placeholder="请输入平台 0未知" />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
-        </div>
-      </template>
-    </el-dialog>
   </div>
 </template>
 
 <script setup name="Parse">
-import { listParse, getParse, delParse, addParse, updateParse } from "@/api/dou/parse";
+import { listParse, delParse } from "@/api/dou/parse";
 
 const { proxy } = getCurrentInstance();
 
@@ -138,30 +96,13 @@ const data = reactive({
   form: {},
   queryParams: {
     pageNum: 1,
-    pageSize: 10,
+    pageSize: 20,
     id: null,
-    url: null,
-    type: null,
-    text: null,
     platform: null,
   },
-  rules: {
-    url: [
-      { required: true, message: "视频url不能为空", trigger: "blur" }
-    ],
-    platform: [
-      { required: true, message: "平台不能为空", trigger: "blur" }
-    ],
-    createTime: [
-      { required: true, message: "创建时间不能为空", trigger: "blur" }
-    ],
-    updateTime: [
-      { required: true, message: "更新时间不能为空", trigger: "blur" }
-    ]
-  }
 });
 
-const { queryParams, form, rules } = toRefs(data);
+const { queryParams } = toRefs(data);
 
 /** 查询视频解析记录列表 */
 function getList() {
@@ -173,32 +114,6 @@ function getList() {
   });
 }
 
-// 取消按钮
-function cancel() {
-  open.value = false;
-  reset();
-}
-
-// 表单重置
-function reset() {
-  form.value = {
-    id: null,
-    url: null,
-    urlHash: null,
-    type: null,
-    video: null,
-    audio: null,
-    images: null,
-    cover: null,
-    text: null,
-    platform: null,
-    proxy: null,
-    origin: null,
-    createTime: null,
-    updateTime: null
-  };
-  proxy.resetForm("parseRef");
-}
 
 /** 搜索按钮操作 */
 function handleQuery() {
@@ -219,44 +134,6 @@ function handleSelectionChange(selection) {
   multiple.value = !selection.length;
 }
 
-/** 新增按钮操作 */
-function handleAdd() {
-  reset();
-  open.value = true;
-  title.value = "添加视频解析记录";
-}
-
-/** 修改按钮操作 */
-function handleUpdate(row) {
-  reset();
-  const _id = row.id || ids.value
-  getParse(_id).then(response => {
-    form.value = response.data;
-    open.value = true;
-    title.value = "修改视频解析记录";
-  });
-}
-
-/** 提交按钮 */
-function submitForm() {
-  proxy.$refs["parseRef"].validate(valid => {
-    if (valid) {
-      if (form.value.id != null) {
-        updateParse(form.value).then(response => {
-          proxy.$modal.msgSuccess("修改成功");
-          open.value = false;
-          getList();
-        });
-      } else {
-        addParse(form.value).then(response => {
-          proxy.$modal.msgSuccess("新增成功");
-          open.value = false;
-          getList();
-        });
-      }
-    }
-  });
-}
 
 /** 删除按钮操作 */
 function handleDelete(row) {

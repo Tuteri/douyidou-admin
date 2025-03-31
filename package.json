@@ -1,19 +1,14 @@
 {
-  "name": "ruoyi",
-  "version": "3.8.9",
-  "description": "若依管理系统",
-  "author": "若依",
-  "license": "MIT",
+  "name": "douyidou",
+  "version": "1.0.0",
+  "description": "抖一抖后台管理系统",
+  "author": "Tuteri",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build:prod": "vite build",
     "build:stage": "vite build --mode staging",
     "preview": "vite preview"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://gitee.com/y_project/RuoYi-Vue.git"
   },
   "dependencies": {
     "@element-plus/icons-vue": "2.3.1",
