@@ -99,16 +99,11 @@
       <el-table-column label="微信昵称" align="center" prop="wxName" />
       <el-table-column label="微信openid" align="center" prop="wxOpenid" />
       <el-table-column label="用户名" align="center" prop="username" />
-      <el-table-column label="密码" align="center" prop="password" />
-      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
-        <template #default="scope">
-          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
+      <el-table-column label="注册ip" align="center" prop="registerIp" />
+      <el-table-column label="登录ip" align="center" prop="loginIp" />
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
-        <template #default="scope">
-          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>
-        </template>
+      </el-table-column>
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
       </el-table-column>
       <el-table-column label="头像" align="center" prop="avatar" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
