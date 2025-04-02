@@ -104,7 +104,7 @@ function submitForm() {
     const dataArray = originFormData.map((item) => ({
       configId: item.configId,
       configKey: item.configKey,
-      configValue: formData.value[item.configKey.replace("routine.", "")], // 直接从 formData 获取值
+      configValue: formData.value[item.configKey.replace("routine.", "")].trim(), // 直接从 formData 获取值
     }));
 
     configRoutineSave(dataArray).then((res) => {
