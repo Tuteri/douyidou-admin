@@ -99,6 +99,16 @@
         </template>
         <el-input-number v-model="formData.adRewardTokens" :min="0" :max="100000000"></el-input-number>
       </el-form-item>
+      <el-form-item label="主动广告激励广告id" prop="adRewardTokensId" v-if="formData.adRewardTokensStatus == 'true'">
+        <template #label>
+          <span>主动广告激励广告id
+            <el-tooltip :content="objectFormData.adRewardTokensId.remark || objectFormData.adRewardTokensId.configName" placement="bottom" effect="light" v-if="objectFormData.adRewardTokensId">
+              <el-icon><question-filled /></el-icon>
+            </el-tooltip>
+          </span>
+        </template>
+        <el-input v-model="formData.adRewardTokensId" type="text" placeholder="请输入激励广告id" clearable :style="{width: '50%'}"></el-input>
+      </el-form-item>
 
       <el-form-item label="每日分享状态" prop="shareNumStatus">
         <template #label>
@@ -126,15 +136,15 @@
         </el-form-item>
       </template>
 
-      <el-form-item label="tokens与次数比例" prop="adTokensToParseNum">
+      <el-form-item label="tokens与次数比例" prop="tokensToParseNum">
         <template #label>
           <span>tokens与次数比例
-            <el-tooltip :content="objectFormData.adTokensToParseNum.remark || objectFormData.adTokensToParseNum.configName" placement="bottom" effect="light" v-if="objectFormData.adTokensToParseNum">
+            <el-tooltip :content="objectFormData.tokensToParseNum.remark || objectFormData.tokensToParseNum.configName" placement="bottom" effect="light" v-if="objectFormData.tokensToParseNum">
               <el-icon><question-filled /></el-icon>
             </el-tooltip>
           </span>
         </template>
-        <el-input-number v-model="formData.adTokensToParseNum" :min="1" :max="100000000"></el-input-number>
+        <el-input-number v-model="formData.tokensToParseNum" :min="1" :max="100000000"></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm">提交</el-button>
@@ -162,9 +172,10 @@ const data = reactive({
     adRewardInterval: 0,
     adRewardParseNum: 0,
     adRewardTokens: 0,
-    adTokensToParseNum: 0,
+    tokensToParseNum: 0,
     adRewardParseNumStatus: "",
     adRewardTokensStatus: "",
+    adRewardTokensId: "",
     shareNumStatus: "false",
     shareNum: 0,
     shareNumTokens: 0,
