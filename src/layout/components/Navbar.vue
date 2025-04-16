@@ -9,7 +9,7 @@
         <header-search id="header-search" class="right-menu-item" />
 
         <el-tooltip content="源码地址" effect="dark" placement="bottom">
-          <ruo-yi-git id="douyidou-git" class="right-menu-item hover-effect" />
+          <dou-yi-dou-git id="douyidou-git" class="right-menu-item hover-effect" />
         </el-tooltip>
 
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
@@ -61,6 +61,7 @@ import HeaderSearch from '@/components/HeaderSearch'
 import useAppStore from '@/store/modules/app'
 import useUserStore from '@/store/modules/user'
 import useSettingsStore from '@/store/modules/settings'
+import DouYiDouGit from '@/components/DouYiDou/Git'
 
 const appStore = useAppStore()
 const userStore = useUserStore()
