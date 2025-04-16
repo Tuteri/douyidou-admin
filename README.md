@@ -1,6 +1,6 @@
 # 抖一抖去水印使用说明
 
-❗ **[后端（Java服务端）](https://github.com/Tuteri/douyidou-java)**
+❗ [**后端（Java服务端）**](https://github.com/Tuteri/douyidou-java)
 
 ❗ [**后台管理**](https://github.com/Tuteri/douyidou-admin)
 
