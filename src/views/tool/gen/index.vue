@@ -169,7 +169,7 @@ const defaultSort = ref({ prop: "createTime", order: "descending" });
 const data = reactive({
   queryParams: {
     pageNum: 1,
-    pageSize: 10,
+    pageSize: 20,
     tableName: undefined,
     tableComment: undefined,
     orderByColumn: defaultSort.value.prop,

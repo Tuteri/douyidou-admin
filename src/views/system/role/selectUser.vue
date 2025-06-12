@@ -79,7 +79,7 @@ const userIds = ref([]);
 
 const queryParams = reactive({
   pageNum: 1,
-  pageSize: 10,
+  pageSize: 20,
   roleId: undefined,
   userName: undefined,
   phonenumber: undefined
